@@ -53,10 +53,53 @@
             <artifactId>jersey-mvc-jsp</artifactId>
             <version>3.1.6</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>3.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.16.1</version>
+        </dependency>
     </dependencies>
 
     <build>
         <finalName>${project.name}</finalName>
+        <!-- Make sure Maven filters web.xml -->
+        <plugins>
+            <!-- 1) WAR plugin: enable filtering of deployment descriptors -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <!-- Expand ${…} in web.xml -->
+                    <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+                </configuration>
+            </plugin>
+
+            <!-- 2) (Optional) Compiler plugin if you need specific settings -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <!-- If you have any resource filtering, configure here -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

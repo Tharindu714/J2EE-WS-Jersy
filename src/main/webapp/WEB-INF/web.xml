@@ -32,4 +32,10 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <context-param>
+        <param-name>upload.directory</param-name>
+<!--        <param-value>${project.basedir}/uploads</param-value> if you want to use a dynamic path, you can use a system property or environment variable-->
+        <param-value>${project.basedir}/src/main/webapp/uploads</param-value>
+    </context-param>
+
 </web-app>

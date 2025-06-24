@@ -20,59 +20,70 @@
     <style>
         :root {
             --brand-primary: #4f46e5;
-            --brand-secondary: #f3f4f6;
+            --brand-secondary: #bab9b9;
             --text-dark: #1f2937;
             --text-muted: #6b7280;
         }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--brand-secondary);
             color: var(--text-dark);
         }
+
         /* Navbar */
         .navbar {
             background-color: var(--brand-primary);
         }
+
         .navbar-brand, .nav-link {
             color: #fff !important;
             font-weight: 600;
         }
+
         /* Hero */
         .hero {
             background: url('https://source.unsplash.com/1600x900/?technology') center/cover no-repeat;
             color: #fff;
             padding: 6rem 0;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
         }
+
         .hero h1 {
             font-size: 3rem;
             font-weight: 600;
         }
+
         .hero p {
             font-size: 1.25rem;
             margin-bottom: 2rem;
         }
+
         /* News cards */
         .card-news {
             border: none;
             border-radius: .75rem;
             transition: transform .2s, box-shadow .2s;
         }
+
         .card-news:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
+
         /* Footer */
         footer {
             background-color: var(--text-dark);
             color: #ccc;
             padding: 2rem 0;
         }
+
         footer a {
             color: #fff;
             margin: 0 .5rem;
             font-size: 1.25rem;
         }
+
         /* Dark mode toggle */
         .form-check-input:checked + .form-check-label::before {
             background-color: var(--brand-primary) !important;
@@ -112,7 +123,31 @@
     <div class="container">
         <h1>Welcome to MVC Web Application</h1>
         <p>Explore the features and functionalities built with JSP and Servlets.</p>
-        <a href="#" class="btn btn-lg btn-light">Learn More</a>
+
+        <!-- File‐upload form -->
+        <form id="uploadForm" enctype="multipart/form-data">
+            <!-- hidden real file input -->
+            <input
+                    type="file"
+                    id="fileInput"
+                    name="file"
+                    style="display: none;"
+            />
+
+            <!-- styled label to open file dialog -->
+            <label for="fileInput" class="btn btn-lg btn-light">
+                Choose File…
+            </label>
+            <!-- place to show the chosen filename -->
+            <span id="fileName" style="margin-left: 1rem; font-style: italic;">
+        No file chosen
+      </span>
+
+            <!-- the actual upload button -->
+            <button type="submit" class="btn btn-lg btn-primary" style="margin-left: 1rem;">
+                Upload
+            </button>
+        </form>
     </div>
 </section>
 
@@ -124,10 +159,12 @@
             <!-- Card 1 -->
             <div class="col-md-4">
                 <div class="card card-news">
-                    <img src="https://www.taazaa.com/wp-content/uploads/2024/03/Top_Three_Features_of_ASP_750x420-1.jpg" class="card-img-top" alt="Feature">
+                    <img src="https://www.taazaa.com/wp-content/uploads/2024/03/Top_Three_Features_of_ASP_750x420-1.jpg"
+                         class="card-img-top" alt="Feature">
                     <div class="card-body">
                         <h5 class="card-title">New Features Released</h5>
-                        <p class="card-text">We’ve rolled out an exciting set of features to enhance your experience.</p>
+                        <p class="card-text">We’ve rolled out an exciting set of features to enhance your
+                            experience.</p>
                         <a href="#" class="btn btn-sm btn-primary">Read More</a>
                     </div>
                 </div>
@@ -135,7 +172,8 @@
             <!-- Card 2 -->
             <div class="col-md-4">
                 <div class="card card-news">
-                    <img src="https://www.syncfusion.com/blogs/wp-content/uploads/2024/12/ASP.NET-MVC-Suite-Update-Aligning-with-.NET-Changes.jpg" class="card-img-top" alt="Update">
+                    <img src="https://www.syncfusion.com/blogs/wp-content/uploads/2024/12/ASP.NET-MVC-Suite-Update-Aligning-with-.NET-Changes.jpg"
+                         class="card-img-top" alt="Update">
                     <div class="card-body">
                         <h5 class="card-title">System Update</h5>
                         <p class="card-text">Our platform received a performance upgrade—faster, smoother, stronger.</p>
@@ -146,7 +184,8 @@
             <!-- Card 3 -->
             <div class="col-md-4">
                 <div class="card card-news">
-                    <img src="https://market-resized.envatousercontent.com/previews/files/631135130/preview.png?w=590&h=300&cf_fit=crop&crop=top&format=auto&q=85&s=431dab77acfd5434c07883fad261630c0a782c6355be9c678fc0e22668c7ce19" class="card-img-top" alt="Team">
+                    <img src="https://market-resized.envatousercontent.com/previews/files/631135130/preview.png?w=590&h=300&cf_fit=crop&crop=top&format=auto&q=85&s=431dab77acfd5434c07883fad261630c0a782c6355be9c678fc0e22668c7ce19"
+                         class="card-img-top" alt="Team">
                     <div class="card-body">
                         <h5 class="card-title">Meet the Team</h5>
                         <p class="card-text">Get to know the people powering your favorite web app.</p>
@@ -174,10 +213,54 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 <script>
     // Dark Mode Toggle
-    document.getElementById('darkModeSwitch').addEventListener('change', function() {
+    document.getElementById('darkModeSwitch').addEventListener('change', function () {
         document.body.classList.toggle('bg-dark');
         document.body.classList.toggle('text-light');
         document.querySelectorAll('.card-news').forEach(c => c.classList.toggle('bg-secondary'));
+    });
+    // File Upload Handling
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.getElementById('fileInput');
+        const fileNameSpan = document.getElementById('fileName');
+        const uploadForm = document.getElementById('uploadForm');
+
+        // When a file is chosen, display its name
+        fileInput.addEventListener('change', () => {
+            fileNameSpan.textContent = fileInput.files.length
+                ? fileInput.files[0].name
+                : 'No file chosen';
+        });
+
+        // When the form is submitted, send the file via Fetch API
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!fileInput.files.length) {
+                alert('Please choose a file first.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            try {
+                const resp = await fetch('http://localhost:8080/JERSEY-WEB/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!resp.ok) {
+                    const msg = await resp.text();
+                    throw new Error(msg || resp.statusText);
+                }
+
+                alert('Upload successful!');
+                // reset form
+                fileInput.value = '';
+                fileNameSpan.textContent = 'No file chosen';
+            } catch (err) {
+                alert('Upload failed: ' + err.message);
+            }
+        });
     });
 </script>
 </body>
