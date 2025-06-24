@@ -36,19 +36,25 @@ This project illustrates building RESTful web services with **Jersey** (JAX-RS r
 
 ```
 src/main/java/com/tharindu/jersey/
+├── annotation/
+│   └── UserBind.java       #Userbinding annotation (optional)
 ├── config/
 │   └── AppConfig.java      # Registers Jersey via @ApplicationPath
 ├── controller/
 │   └── HomeController.java         # Sample @Path endpoints
-├── filter/
+├── middleware/
 │   ├── RequestFilter.java          # Implements ContainerRequestFilter
 │   └── ResponseFilter.java         # Implements ContainerResponseFilter
+├── model/
+│   └── User.java                   #UserBean Serializable class
 └── TestController.java/
 
-src/main/webapp/WEB-INF/
-├── web.xml                         # Servlet & filter mappings
-└── views/
-    └── index.jsp                  # Home page
+src/main/webapp
+├── uploads/                            # Uploaded Documents
+├── WEB-INF/
+     ├── web.xml                         # Servlet & filter mappings
+     └── views/
+          └── index.jsp                  # Home page
 ```
 
 ---
@@ -187,9 +193,10 @@ public class ResponseFilter implements ContainerResponseFilter {
 
 Under `WEB-INF/views`, JSP pages render dynamic content:
 
-* **index.jsp**: Home landing page with links to `/api/test`
-* **test.jsp**: Displays JSON or text output in HTML
-* **error.jsp**: Custom error display for 404 or exceptions
+* **index.jsp**: Home landing page with links to `http://localhost:8080/JERSEY-WEB/`
+* User also can Upload files using Upload button and Perform MVC Uploading functions `fetch(http://localhost:8080/JERSEY-WEB/upload)`
+
+![image](https://github.com/user-attachments/assets/8dbfcc6b-3343-4160-94da-fff94507a893) 
 
 > *Place your view screenshots below:*
 
